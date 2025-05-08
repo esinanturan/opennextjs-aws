@@ -1,5 +1,13 @@
 # open-next
 
+## 3.6.1
+
+### Patch Changes
+
+- [#851](https://github.com/opennextjs/opennextjs-aws/pull/851) [`68a13a4d56e198629fe1d3ae6e6d4034f3a01c0c`](https://github.com/opennextjs/opennextjs-aws/commit/68a13a4d56e198629fe1d3ae6e6d4034f3a01c0c) Thanks [@sommeeeer](https://github.com/sommeeeer)! - fix: Ensure cookies set in middleware are available on initial render when using `cookies().get()` from Next.js
+
+- [#857](https://github.com/opennextjs/opennextjs-aws/pull/857) [`c2da3a8df638b8facdb896e22538a143b3425006`](https://github.com/opennextjs/opennextjs-aws/commit/c2da3a8df638b8facdb896e22538a143b3425006) Thanks [@sommeeeer](https://github.com/sommeeeer)! - fix: make dev overrides work in monorepo
+
 ## 3.6.0
 
 ### Minor Changes
