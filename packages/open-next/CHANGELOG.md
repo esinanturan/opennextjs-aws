@@ -1,5 +1,11 @@
 # open-next
 
+## 3.6.5
+
+### Patch Changes
+
+- [#889](https://github.com/opennextjs/opennextjs-aws/pull/889) [`caa57b3ef11f5d2409bf7d64665f8a917bb15486`](https://github.com/opennextjs/opennextjs-aws/commit/caa57b3ef11f5d2409bf7d64665f8a917bb15486) Thanks [@vicb](https://github.com/vicb)! - fix cookie decoding for Node and Cloudflare
+
 ## 3.6.4
 
 ### Patch Changes
