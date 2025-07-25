@@ -1,5 +1,11 @@
 # open-next
 
+## 3.7.2
+
+### Patch Changes
+
+- [#931](https://github.com/opennextjs/opennextjs-aws/pull/931) [`c48ac9565863706486f796a75aaecdd27aebd551`](https://github.com/opennextjs/opennextjs-aws/commit/c48ac9565863706486f796a75aaecdd27aebd551) Thanks [@vicb](https://github.com/vicb)! - refactor the CodePatcher
+
 ## 3.7.1
 
 ### Patch Changes
