@@ -265,23 +265,23 @@ export async function cacheInterceptor(
   localizedPath = localizedPath.replace(/\/$/, "");
 
   // Then we decode the path params
-  localizedPath = decodePathParams(localizedPath);
+  localizedPath = decodePathParams(localizedPath) || "/";
+
+  // The route is keyed as `/` in the prerender manifest, but the generated
+  // cache asset for the app index route is uploaded as `/index`.
+  const cacheKey = localizedPath === "/" ? "/index" : localizedPath;
 
   debug("Checking cache for", localizedPath, PrerenderManifest);
 
   const isISR =
-    Object.keys(PrerenderManifest?.routes ?? {}).includes(
-      localizedPath ?? "/",
-    ) ||
+    Object.keys(PrerenderManifest?.routes ?? {}).includes(localizedPath) ||
     Object.values(PrerenderManifest?.dynamicRoutes ?? {}).some((dr) =>
       new RegExp(dr.routeRegex).test(localizedPath),
     );
   debug("isISR", isISR);
   if (isISR) {
     try {
-      const cachedData = await globalThis.incrementalCache.get(
-        localizedPath ?? "/index",
-      );
+      const cachedData = await globalThis.incrementalCache.get(cacheKey);
       debug("cached data in interceptor", cachedData);
 
       if (!cachedData?.value) {
@@ -295,7 +295,7 @@ export async function cacheInterceptor(
       ) {
         const _hasBeenRevalidated = cachedData.shouldBypassTagCache
           ? false
-          : await hasBeenRevalidated(localizedPath, tags, cachedData);
+          : await hasBeenRevalidated(cacheKey, tags, cachedData);
 
         if (_hasBeenRevalidated) {
           return event;
@@ -305,11 +305,7 @@ export async function cacheInterceptor(
       // Check if the cache entry is stale (valid but needs background revalidation)
       const _isStale = cachedData.shouldBypassTagCache
         ? false
-        : await isStale(
-            localizedPath,
-            tags,
-            cachedData.lastModified ?? Date.now(),
-          );
+        : await isStale(cacheKey, tags, cachedData.lastModified ?? Date.now());
 
       const host = event.headers.host;
       switch (cachedData?.value?.type) {
